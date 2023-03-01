@@ -1,5 +1,8 @@
 #
 /videos
+<<<<<<< HEAD
 /face_image
 /__pycache__
-/AIML-Human-Attributes-Detection-with-Facial-Feature-Extraction
+=======
+/__pycache__
+>>>>>>> 9081267be5b9f83ec49529819268d586ebbfea9f
