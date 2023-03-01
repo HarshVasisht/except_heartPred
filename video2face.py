@@ -4,14 +4,13 @@ import numpy as np
 import cv2
 import config
 import datacapture
-import heartpred
 
 artifact_config_file = config.read_yaml('config.yaml')
 hrc = artifact_config_file['Artifacts_path']['haarcascade']
 oft = artifact_config_file['Artifacts_path']['output_folder_path']
 file = 'database.json'
 
-def extract_face_from_video(video_path, output_folder_path = oft, hrc = hrc):
+def extract_face_from_video(username, video_path, output_folder_path = oft, hrc = hrc):
     try:
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + hrc)
         if face_cascade.empty():
@@ -31,7 +30,7 @@ def extract_face_from_video(video_path, output_folder_path = oft, hrc = hrc):
             
             for (x, y, w, h) in faces:
                 face_image = frame[y:y+h, x:x+w]
-                cv2.imwrite(output_folder_path + "/face%d.jpg" % count, face_image)
+                cv2.imwrite(f"{output_folder_path}/{username}{count}.jpg" )
                 count += 1
     
     except Exception as e:
@@ -66,7 +65,7 @@ def display_img(img):
   plt.show()
 
 
-def predict(img_path, user_name, file_path = file):
+def predict(img_path, user_name , file_path = file):
     emotion, age, gender = actions(img_path=img_path)
     display_img(img=img_path)
     db = {'Name':user_name, 'Emotion': emotion, 'Age': age, 'Gender': gender}
@@ -76,4 +75,4 @@ def predict(img_path, user_name, file_path = file):
 
 
 if __name__ == '__main__':
-    predict('face_image/face0.jpg')
+    predict('face_image/face0.jpg', user_name= 'harsh_face2video')

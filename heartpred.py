@@ -8,10 +8,15 @@ from evalutation import error
 from heartrate import find_heart_rate
 from preprocessing import read_video, capture_video
 from datetime import datetime
-import video2face
 from pyramids import *
+import video2face
+import datacapture
+import config
 
-
+artifact_config_file = config.read_yaml('config.yaml')
+hrc = artifact_config_file['Artifacts_path']['haarcascade']
+oft = artifact_config_file['Artifacts_path']['output_folder_path']
+file = 'database.json'
 
 try:
     # current dateTime
@@ -43,7 +48,7 @@ try:
         capture_video(user_name)
         console.print("Capturing of video Done......!!\n", style="blink bold red underline on white")
         video_frames, frame_ct, fps = read_video(f"videos/cam{user_name}.avi")
-        
+        video_path = f'./videos/cam{user_name}.avi'
         lap_video = build_video_pyramid(video_frames)
         # print(lap_video)
         amplified_video_pyramid = []
@@ -77,12 +82,21 @@ try:
         #     cv2.imshow("frame", frame)
         #     cv2.waitKey(20)
 
+        console.print("Capturing images for emotion detection", style="blink bold red underline on Green")
+        # video2face.extract_face_from_video(username = user_name, video_path = video_path, output_folder_path = oft, hrc = hrc)
+
+
+
+
         console.print("+++++++++++++++++++++++++++++++", style="blink bold red underline on Green")
-        error(heart_rate)
-        file1 = open("CamTrialhr.txt", "w")  # write mode
-        file1.write('Hello,'+ user_name + ' your\n')
-        file1.write('Predicted Heart Rate: '+ str(heart_rate) + " @ " + date_time_str )
-        file1.close()
+        # error(heart_rate)
+        file1 = './heartrate.json'
+        dict1 = {'Name': user_name, 'Heart Rate': heart_rate, 'Time': date_time_str}
+        # file1 = open("CamTrialhr.txt", "w")  # write mode
+        datacapture.write_data(dict1, file1)
+        # file1.write('Hello,'+ user_name + ' your\n')
+        # file1.write('Predicted Heart Rate: '+ str(heart_rate) + " @ " + date_time_str )
+        # file1.close()
         console.print("+++++++++++++++++++++++++++++++", style="blink bold red underline on Green")
         return heart_rate, user_name
 
