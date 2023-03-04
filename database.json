@@ -1,0 +1,17 @@
+{
+    "User Name": "default",
+    "Emotion": [
+        99.99642372131348,
+        "neutral"
+    ],
+    "Age": 23,
+    "Gender": [
+        100.0,
+        "Man"
+    ],
+    "Race": [
+        59.419988462926334,
+        "indian"
+    ],
+    "Dominant Emotion": "indian"
+}

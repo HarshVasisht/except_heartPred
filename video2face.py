@@ -47,13 +47,14 @@ def actions(img_path):
     actions=('emotion', 'age', 'gender', 'race')
     img = plt.imread(img_path)
     obj  = df.analyze(img)
+    data = obj[0]
     # print("Age: ", obj["age"])
     # print("Emotion: ", obj["dominant_emotion"])
     # print("Gender: ", obj["gender"])
     # print("Race: ", obj["dominant_race"])
     # print('─' * 10)
-    emotion, age, gender= obj["emotion"], obj["age"], obj["gender"]
-    return emotion, age, gender
+    # emotion, age, gender= obj["dominant_emotion"], obj["age"], obj["gender"]
+    return data
 
 def face_detector(img_path):
   backends = ['opencv', 'ssd', 'dlib', 'mtcnn', 'retinaface', 'mediapipe']
@@ -65,14 +66,25 @@ def display_img(img):
   plt.show()
 
 
-def predict(img_path, user_name , file_path = file):
-    emotion, age, gender = actions(img_path=img_path)
+def extract_data(data):
+    emt, gen, age, race, dmt = data['emotion'], data['gender'], data['age'], data['race'],  data['dominant_race']
+    pred_emt = max(zip(emt.values(), emt.keys()))
+    pred_gen = max(zip(gen.values(), gen.keys()))
+    pred_race = max(zip(race.values(), race.keys()))
+    data_list = [pred_emt,pred_gen,pred_race, age, dmt]
+    # return pred_emt,pred_gen,pred_race, age, dmt
+    return data_list
+
+# def predict(img_path ,file_path = file, emotion = pred_emt, gender = pred_gen, race = pred_race, age = age, demt = dmt):
+def predict(img_path,   username = 'default' ,file_path = file):
+    obj = actions(img_path=img_path)
+    dl = extract_data(obj)
     display_img(img=img_path)
-    db = {'Name':user_name, 'Emotion': emotion, 'Age': age, 'Gender': gender}
+    db = { 'User Name': username , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4]}
     datacapture.write_data(db, file_path)
 
 
 
 
 if __name__ == '__main__':
-    predict('face_image/face0.jpg', user_name= 'harsh_face2video')
+    predict('face_image/face0.jpg')
