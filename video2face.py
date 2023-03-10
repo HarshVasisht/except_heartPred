@@ -4,11 +4,14 @@ import numpy as np
 import cv2
 import config
 import datacapture
+import heartpred as hp
 
 artifact_config_file = config.read_yaml('config.yaml')
 hrc = artifact_config_file['Artifacts_path']['haarcascade']
 oft = artifact_config_file['Artifacts_path']['output_folder_path']
 file = 'database.json'
+
+
 
 def extract_face_from_video(username, video_path, output_folder_path = oft, hrc = hrc):
     try:
@@ -76,11 +79,15 @@ def extract_data(data):
     return data_list
 
 # def predict(img_path ,file_path = file, emotion = pred_emt, gender = pred_gen, race = pred_race, age = age, demt = dmt):
-def predict(img_path,   username = 'default' ,file_path = file):
+def predict(img_path,   username = 'Default' ,file_path = file):
+    esti_HR, username = hp.heart_pred()
+
+    # extract_face_from_video(username = username, video_path = "videos/cam{username}.avi", output_folder_path = oft, hrc = hrc)
+
     obj = actions(img_path=img_path)
     dl = extract_data(obj)
     display_img(img=img_path)
-    db = { 'User Name': username , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4]}
+    db = { 'User Name': username , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4], 'Estimated HeartRate': esti_HR}
     datacapture.write_data(db, file_path)
 
 

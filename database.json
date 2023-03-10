@@ -1,5 +1,5 @@
 {
-    "User Name": "default",
+    "User Name": "dd",
     "Emotion": [
         99.99642372131348,
         "neutral"
@@ -13,5 +13,6 @@
         59.419988462926334,
         "indian"
     ],
-    "Dominant Emotion": "indian"
+    "Dominant Emotion": "indian",
+    "Estimated HeartRate": 88.9655172413793
 }

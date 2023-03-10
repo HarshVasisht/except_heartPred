@@ -9,7 +9,7 @@ from heartrate import find_heart_rate
 from preprocessing import read_video, capture_video
 from datetime import datetime
 from pyramids import *
-import video2face
+# import video2face
 import datacapture
 import config
 
