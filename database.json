@@ -1,18 +1,18 @@
 {
-    "User Name": "dd",
+    "User Name": "Default",
     "Emotion": [
-        99.99642372131348,
+        95.87712859375051,
         "neutral"
     ],
-    "Age": 23,
+    "Age": 24,
     "Gender": [
         100.0,
         "Man"
     ],
     "Race": [
-        59.419988462926334,
-        "indian"
+        51.25814080238342,
+        "latino hispanic"
     ],
-    "Dominant Emotion": "indian",
-    "Estimated HeartRate": 88.9655172413793
+    "Dominant Emotion": "latino hispanic",
+    "Estimated HeartRate": 80.0
 }

@@ -44,7 +44,7 @@ def capture_video(user_name):
     # from datetime import datetime
     # start_time = timer(None)
     # timer(start_time)
-    video = VideoWriter(f'videos/cam{user_name}.avi', VideoWriter_fourcc(*'MP42'), 25.0, (640,480))
+    video = VideoWriter(f'videos/{user_name}.avi', VideoWriter_fourcc(*'MP42'), 25.0, (640,480))
     while True:
             ret, frame = cap.read()
             cv2.imshow('Capturing HeartRate.....',frame)

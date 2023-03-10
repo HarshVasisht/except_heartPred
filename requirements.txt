@@ -1,0 +1,4 @@
+deepface
+matplotlib
+pandas
+numpy

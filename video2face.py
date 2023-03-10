@@ -13,8 +13,9 @@ file = 'database.json'
 
 
 
-def extract_face_from_video(username, video_path, output_folder_path = oft, hrc = hrc):
+def extract_face_from_video(username, output_folder_path = oft, hrc = hrc):
     try:
+        video_path = f'./videos/{username}.avi'
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + hrc)
         if face_cascade.empty():
             raise Exception("Failed to load face cascade classifier file")
@@ -30,12 +31,14 @@ def extract_face_from_video(username, video_path, output_folder_path = oft, hrc 
             
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
             
             for (x, y, w, h) in faces:
                 face_image = frame[y:y+h, x:x+w]
-                cv2.imwrite(f"{output_folder_path}/{username}{count}.jpg" )
+                cv2.imwrite(f"{output_folder_path}/{username}{count}.jpg" , face_image)
                 count += 1
-    
+            if count == 5:
+                return True
     except Exception as e:
         raise e
 
@@ -69,13 +72,8 @@ def display_img(img):
   plt.show()
 
 
-<<<<<<< HEAD
-## >> Our Calling Functions >>
 
 
-def predict(img_path, user_name , file_path = file):
-    emotion, age, gender = actions(img_path=img_path)
-=======
 def extract_data(data):
     emt, gen, age, race, dmt = data['emotion'], data['gender'], data['age'], data['race'],  data['dominant_race']
     pred_emt = max(zip(emt.values(), emt.keys()))
@@ -86,20 +84,31 @@ def extract_data(data):
     return data_list
 
 # def predict(img_path ,file_path = file, emotion = pred_emt, gender = pred_gen, race = pred_race, age = age, demt = dmt):
-def predict(img_path,   username = 'Default' ,file_path = file):
-    esti_HR, username = hp.heart_pred()
+def predict(username = 'Default' ,file_path = file):
+    data = datacapture.read_data('heartrate.json')
+    if data['Name'] == username:
+        
+        pass
 
-    # extract_face_from_video(username = username, video_path = "videos/cam{username}.avi", output_folder_path = oft, hrc = hrc)
+    else:
 
-    obj = actions(img_path=img_path)
-    dl = extract_data(obj)
->>>>>>> 8d42734caaf92e4e004ac20bc113aa77e70a00ec
-    display_img(img=img_path)
-    db = { 'User Name': username , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4], 'Estimated HeartRate': esti_HR}
-    datacapture.write_data(db, file_path)
+        esti_HR, username = hp.heart_pred()
+        print(username, 'USN')
+        print()
+        v_path = f"./videos/{username}.avi"
+        ext = extract_face_from_video(username = username, output_folder_path = oft, hrc = hrc)
+
+        if ext == True:
+            img_path = f"{oft}/{username}0.jpg"
+
+            obj = actions(img_path=img_path)
+            dl = extract_data(obj)
+            display_img(img=img_path)
+            db = { 'User Name': username , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4], 'Estimated HeartRate': esti_HR}
+            datacapture.write_data(db, file_path)
 
 
 
 
 if __name__ == '__main__':
-    predict('face_image/face0.jpg')
+    predict()

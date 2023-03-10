@@ -1,11 +1,10 @@
-import json, os, sys
-from rich import (traceback, console)
+import json, os
 
 # traceback.install()
 # console
 def read_data(f_name):
     # Opening JSON file
-    if not os.exist(f_name):
+    if not os.path.exists(f_name):
         return {}
     
     f = open(f_name)

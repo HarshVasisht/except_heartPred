@@ -9,10 +9,6 @@ from heartrate import find_heart_rate
 from preprocessing import read_video, capture_video
 from datetime import datetime
 from pyramids import *
-<<<<<<< HEAD
-=======
-# import video2face
->>>>>>> 8d42734caaf92e4e004ac20bc113aa77e70a00ec
 import datacapture
 import config
 
@@ -49,12 +45,15 @@ def heart_pred():
         # user_name=input("Enter your name:")
         # console.print("Entering capturing mode......\n", style="blink bold red underline on white")
     
-    
         user_name = input("Please enter your name: ") # can be taken from the user also
+
+        if user_name == 's' or user_name == 'S':
+            user_name = 'Default'
+                
         capture_video(user_name)
         console.print("Capturing of video Done......!!\n", style="blink bold red underline on white")
-        video_frames, frame_ct, fps = read_video(f"videos/cam{user_name}.avi")
-        video_path = f'./videos/cam{user_name}.avi'
+        video_frames, frame_ct, fps = read_video(f"videos/{user_name}.avi")
+        video_path = f'./videos/{user_name}.avi'
         lap_video = build_video_pyramid(video_frames)
         # print(lap_video)
         amplified_video_pyramid = []
