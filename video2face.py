@@ -65,6 +65,9 @@ def display_img(img):
   plt.show()
 
 
+## >> Our Calling Functions >>
+
+
 def predict(img_path, user_name , file_path = file):
     emotion, age, gender = actions(img_path=img_path)
     display_img(img=img_path)

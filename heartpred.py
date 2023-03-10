@@ -9,41 +9,43 @@ from heartrate import find_heart_rate
 from preprocessing import read_video, capture_video
 from datetime import datetime
 from pyramids import *
-import video2face
 import datacapture
 import config
 
-artifact_config_file = config.read_yaml('config.yaml')
-hrc = artifact_config_file['Artifacts_path']['haarcascade']
-oft = artifact_config_file['Artifacts_path']['output_folder_path']
-file = 'database.json'
 
-try:
-    # current dateTime
-    now = datetime.now()
+def heart_pred():
+    try:
+        artifact_config_file = config.read_yaml('config.yaml')
+        # hrc = artifact_config_file['Artifacts_path']['haarcascade']
+        # oft = artifact_config_file['Artifacts_path']['output_folder_path']
+        # file = 'database.json'
 
-    # convert to string
-    date_time_str = now.strftime("%Y-%m-%d %H:%M:%S")
-    print('DateTime String:', date_time_str)
-    # from pyramids import build_gaussian_pyramid, build_laplacian_pyramid, build_video_pyramid, collapse_laplacian_video_pyramid
+        # current dateTime
+        
+        now = datetime.now()
 
-    # vpath = Path("videos/cam2_best_83(84).avi")
-    # print(vpath)
-    print(os.getcwd())
+        # convert to string
+        date_time_str = now.strftime("%Y-%m-%d %H:%M:%S")
+        print('DateTime String:', date_time_str)
+        # from pyramids import build_gaussian_pyramid, build_laplacian_pyramid, build_video_pyramid, collapse_laplacian_video_pyramid
 
-    faceCascade = cv2.CascadeClassifier("haarcascades/haarcascade_frontalface_alt0.xml")
+        # vpath = Path("videos/cam2_best_83(84).avi")
+        # print(vpath)
+        print(os.getcwd())
 
-    traceback.install()
-    console = Console()
+        faceCascade = cv2.CascadeClassifier("haarcascades/haarcascade_frontalface_alt0.xml")
 
-    freq_min = 1
-    freq_max = 1.8
+        traceback.install()
+        console = Console()
 
-    # input_camera=int(input())
-    # user_name=input("Enter your name:")
-    # console.print("Entering capturing mode......\n", style="blink bold red underline on white")
+        freq_min = 1
+        freq_max = 1.8
+
+        # input_camera=int(input())
+        # user_name=input("Enter your name:")
+        # console.print("Entering capturing mode......\n", style="blink bold red underline on white")
     
-    def heart_pred():
+    
         user_name = input("Please enter your name: ") # can be taken from the user also
         capture_video(user_name)
         console.print("Capturing of video Done......!!\n", style="blink bold red underline on white")
@@ -100,8 +102,10 @@ try:
         console.print("+++++++++++++++++++++++++++++++", style="blink bold red underline on Green")
         return heart_rate, user_name
 
-    heart_pred()
+    
 
+    except Exception as e:
+        raise e
+    
+# heart_pred()
 
-except:
-    print()
