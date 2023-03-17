@@ -101,7 +101,7 @@ def predict(username = 'Default' ,file_path = file):
 
     else:
 
-        esti_HR, username = hp.heart_pred()
+        esti_HR, username = hp.heart_pred(username)
         print(username, 'USN')
         print()
         v_path = f"./videos/{username}.avi"
@@ -157,11 +157,11 @@ def coffee_recommendation(db = 'database.json', model = grid_search_pred):
     pred = model.predict(df)
     return pred[0], usn, em
 
-if __name__ == '__main__':
-    predict()
-    pCoffee, usn, em = coffee_recommendation()
+# if __name__ == '__main__':
+#     predict()
+#     pCoffee, usn, em = coffee_recommendation()
     
-    console.print("============================================================", style="blink bold red underline on Green")
-    console.print(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
-    console.print("============================================================", style="blink bold red underline on Green")
+#     console.print("============================================================", style="blink bold red underline on Green")
+#     console.print(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
+#     console.print("============================================================", style="blink bold red underline on Green")
 
