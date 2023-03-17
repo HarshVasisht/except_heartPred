@@ -64,20 +64,20 @@ def app():
     login_password = st.text_input("Password", type="password")
     login_button = st.button("Login")
     if login_button:
-        login_result,val = login(login_username, login_password)
-        st.write(login_result)
-    if val is True:
-        predict()
-        pCoffee, usn, em = coffee_recommendation()
-        st.write("============================================================", style="blink bold red underline on Green")
-        st.write(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
-        st.write("============================================================", style="blink bold red underline on Green")
+            with st.spinner("Logging in..."):
+                login_result,val = login(login_username, login_password)
+            st.write(login_result)
+            if val is True:
+                with st.spinner("Generating coffee recommendation..."):
+                    predict(username=login_username)
+                    pCoffee, usn, em = coffee_recommendation()
+                st.write("============================================================", style="blink bold red underline on Green")
+                st.write(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
+                st.write("============================================================", style="blink bold red underline on Green")
 
-
-        console.print("============================================================", style="blink bold red underline on Green")
-        console.print(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
-        console.print("============================================================", style="blink bold red underline on Green")
-
+                console.print("============================================================", style="blink bold red underline on Green")
+                console.print(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
+                console.print("============================================================", style="blink bold red underline on Green")
     
 
 # Run the Streamlit app
