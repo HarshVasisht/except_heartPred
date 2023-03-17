@@ -1,18 +1,18 @@
 {
     "User Name": "Harsh",
     "Emotion": [
-        98.52685332298279,
-        "happy"
+        98.70830774307251,
+        "neutral"
     ],
-    "Age": 23,
+    "Age": 27,
     "Gender": [
-        100.0,
+        99.72979426383972,
         "Man"
     ],
     "Race": [
-        43.190994452893406,
-        "latino hispanic"
+        53.99624657675665,
+        "indian"
     ],
-    "Dominant Emotion": "latino hispanic",
-    "Estimated HeartRate": 82.28373702422145
+    "Dominant Emotion": "indian",
+    "Estimated HeartRate": 86.66666666666667
 }
