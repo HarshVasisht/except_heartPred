@@ -43,7 +43,7 @@ def extract_face_from_video(username, output_folder_path = oft, hrc = hrc):
                 face_image = frame[y:y+h, x:x+w]
                 cv2.imwrite(f"{output_folder_path}/{username}{count}.jpg" , face_image)
                 count += 1
-            if count == 5:
+            if count == 2:
                 return True
     except Exception as e:
         raise e
