@@ -13,7 +13,7 @@ import datacapture
 import config
 
 
-def heart_pred():
+def heart_pred(username="None"):
     try:
         artifact_config_file = config.read_yaml('config.yaml')
         # hrc = artifact_config_file['Artifacts_path']['haarcascade']
@@ -45,7 +45,8 @@ def heart_pred():
         # user_name=input("Enter your name:")
         # console.print("Entering capturing mode......\n", style="blink bold red underline on white")
     
-        user_name = input("Please enter your name: ") # can be taken from the user also
+        # can be taken from the user also
+        # user_name = input("Please enter your name: ") 
         ip_cam=input("Please enter Y/y if using IP cam: ") 
 
         if user_name == 's' or user_name == 'S':
