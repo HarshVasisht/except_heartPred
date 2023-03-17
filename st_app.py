@@ -41,13 +41,13 @@ def login(username, password):
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
                 return "Login successful", True
             else:
-                return "Incorrect password"
-    return "Username not found"
+                return "Incorrect password", False
+    return "Username not found", False
 
 # Define the Streamlit app
 def app():
     st.title("User Registration and Login")
-
+    val = False
     # Display the registration form
     st.subheader("Register")
     reg_username = st.text_input("Username", key="reg_key")
