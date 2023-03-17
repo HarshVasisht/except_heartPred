@@ -1,8 +1,8 @@
 {
-    "User Name": "stHARSH",
+    "User Name": "HH",
     "Emotion": [
-        87.89634848876614,
-        "fear"
+        88.093548303458,
+        "happy"
     ],
     "Age": 23,
     "Gender": [
@@ -10,9 +10,9 @@
         "Man"
     ],
     "Race": [
-        28.378495573997498,
-        "asian"
+        44.44487061767999,
+        "indian"
     ],
-    "Dominant Emotion": "asian",
-    "Estimated HeartRate": 80.34482758620689
+    "Dominant Emotion": "indian",
+    "Estimated HeartRate": 95.81227436823106
 }
