@@ -13,7 +13,7 @@ import datacapture
 import config
 
 
-def heart_pred(username="None"):
+def heart_pred(user_name="None", ip_cam= 'Y'):
     try:
         artifact_config_file = config.read_yaml('config.yaml')
         # hrc = artifact_config_file['Artifacts_path']['haarcascade']
@@ -47,7 +47,7 @@ def heart_pred(username="None"):
     
         # can be taken from the user also
         # user_name = input("Please enter your name: ") 
-        ip_cam=input("Please enter Y/y if using IP cam: ") 
+        # ip_cam1=input("Please enter Y/y if using IP cam: ") 
 
         if user_name == 's' or user_name == 'S':
             user_name = 'Default'
