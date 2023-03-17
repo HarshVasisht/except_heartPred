@@ -38,19 +38,41 @@ def read_video(path):
     cap.release()
 
     return video_frames, frame_ct, fps
-def capture_video(user_name):
-    #file_path=os.path.join('videos','cam')
-    cap = cv2.VideoCapture(0)
-    # from datetime import datetime
-    # start_time = timer(None)
-    # timer(start_time)
-    video = VideoWriter(f'videos/{user_name}.avi', VideoWriter_fourcc(*'MP42'), 25.0, (640,480))
-    while True:
-            ret, frame = cap.read()
-            cv2.imshow('Capturing HeartRate.....',frame)
-            video.write(frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-    cap.release()
-    video.release()
-    cv2.destroyAllWindows()
+def capture_video(user_name,ip=False,port='4747'):
+    if ip == True:
+        """Capturing the video for an external IP network
+        >> Camera use is Droid Cam---Must have an Client connection
+        """
+        ip_value=input("Enter your IP address for establishing connection")
+        #file_path=os.path.join('videos','cam')
+        cap = cv2.VideoCapture(f'{ip_value}:{port}/video')
+        # from datetime import datetime
+        # start_time = timer(None)
+        # timer(start_time)
+        video = VideoWriter(f'videos/{user_name}.avi', VideoWriter_fourcc(*'MP42'), 25.0, (640,480))
+        while True:
+                ret, frame = cap.read()
+                cv2.imshow('Capturing HeartRate.....',frame)
+                video.write(frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+        cap.release()
+        video.release()
+        cv2.destroyAllWindows()
+    else:
+        """Capturing the video from the local Camera"""
+        #file_path=os.path.join('videos','cam')
+        cap = cv2.VideoCapture(0)
+        # from datetime import datetime
+        # start_time = timer(None)
+        # timer(start_time)
+        video = VideoWriter(f'videos/{user_name}.avi', VideoWriter_fourcc(*'MP42'), 25.0, (640,480))
+        while True:
+                ret, frame = cap.read()
+                cv2.imshow('Capturing HeartRate.....',frame)
+                video.write(frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+        cap.release()
+        video.release()
+        cv2.destroyAllWindows()
