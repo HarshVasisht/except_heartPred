@@ -2,3 +2,5 @@ deepface
 matplotlib
 pandas
 numpy
+scikit-learn
+PyYAML
