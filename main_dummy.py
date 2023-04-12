@@ -92,28 +92,29 @@ def extract_data(data):
     return data_list
 
 # def predict(img_path ,file_path = file, emotion = pred_emt, gender = pred_gen, race = pred_race, age = age, demt = dmt):
-def predict(username = 'Default' ,file_path = file):
+def predict(username ,file_path = file):
     data = datacapture.read_data('heartrate.json')
     # print(data["Name"])
-    if data['Name'] == username:
+    if len(data)<=0:
         
         pass
 
     else:
 
-        esti_HR, username = hp.heart_pred(username)
-        print(username, 'USN')
+        esti_HR, username1 = hp.heart_pred(username)
+        print(esti_HR, 'USN')
+        print(username1, 'USN')
         print()
-        v_path = f"./videos/{username}.avi"
-        ext = extract_face_from_video(username = username, output_folder_path = oft, hrc = hrc)
+        v_path = f"./videos/{username1}.avi"
+        ext = extract_face_from_video(username = username1, output_folder_path = oft, hrc = hrc)
 
         if ext == True:
-            img_path = f"{oft}/{username}0.jpg"
+            img_path = f"{oft}/{username1}0.jpg"
 
             obj = actions(img_path=img_path)
             dl = extract_data(obj)
             display_img(img=img_path)
-            db = { 'User Name': username , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4], 'Estimated HeartRate': esti_HR}
+            db = { 'User Name': username1 , 'Emotion': dl[0], 'Age': dl[3], 'Gender': dl[1], 'Race': dl[2], 'Dominant Emotion': dl[4], 'Estimated HeartRate': esti_HR}
             datacapture.write_data(db, file_path)
 
 

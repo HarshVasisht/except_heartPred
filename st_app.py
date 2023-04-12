@@ -5,8 +5,9 @@ import bcrypt
 import json
 import os
 from  main_dummy import *
+from streamlit_player import st_player
 # Define the path to the users JSON file
-JSON_FILE = "users.json"
+JSON_FILE = "./users.json"
 
 # Create a users database
 if os.path.exists(JSON_FILE) and os.stat(JSON_FILE).st_size > 0:
@@ -14,6 +15,7 @@ if os.path.exists(JSON_FILE) and os.stat(JSON_FILE).st_size > 0:
         users = json.load(f)
 else:
     users = []
+print(users)
 
 def save_users():
     with open(JSON_FILE, "w") as f:
@@ -67,13 +69,18 @@ def app():
             with st.spinner("Logging in..."):
                 login_result,val = login(login_username, login_password)
             st.write(login_result)
+            st.empty()
+
             if val is True:
+                v_path = 'C:/Users/harry/Documents/Production_Lib/videos/test.mp4'
+                st_player(v_path)
                 with st.spinner("Generating coffee recommendation..."):
                     predict(username=login_username)
                     pCoffee, usn, em = coffee_recommendation()
                 st.write("============================================================", style="blink bold red underline on Green")
                 st.write(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
                 st.write("============================================================", style="blink bold red underline on Green")
+
 
                 console.print("============================================================", style="blink bold red underline on Green")
                 console.print(f"Hello {usn}, your coffee recommendation is {pCoffee} based on your current emotion, {em}", style="blink bold red underline on Green")
