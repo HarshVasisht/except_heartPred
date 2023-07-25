@@ -26,7 +26,7 @@ The Coffee Emotion Detection and Heart Rate Recommendation System is easy to use
 The project was developed by a team of machine learning enthusiasts:
 
 ``` bash
-Harsh Vasisht (harshadmehta2102@gmail.com)
+Harsh Vasisht (harryvasisht@gmail.com)
 Shubyansh Rai (shubhayansh@gmail.com)
 Rishabh  (rbrishabh76@gmail.com)
 ```
